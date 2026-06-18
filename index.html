@@ -46,108 +46,46 @@
             </a>
           </div>
         </div>
-        <aside class="hero__panel" aria-label="Current focus">
-          <p class="panel-label">Current focus</p>
+        <aside class="hero__panel" aria-label="Terminal instructions">
+          <p class="panel-label">Terminal guide</p>
           <ul class="focus-list">
-            <li>Cloud-native backend architecture</li>
-            <li>Reliable CI/CD and observability</li>
-            <li>Practical LLM workflow automation</li>
+            <li>Type <code>man</code> to see every option</li>
+            <li>Run <code>sv -s</code> to explore my stack</li>
+            <li>Use <code>clear</code> when the terminal gets busy</li>
           </ul>
         </aside>
       </section>
 
-      <section id="journey" class="section reveal">
+      <section id="terminal" class="section section--terminal reveal">
         <div class="section-heading">
-          <p class="eyebrow">Development journey</p>
-          <h2>From enterprise systems to intelligent engineering platforms.</h2>
+          <p class="eyebrow">Interactive terminal</p>
+          <h2>Explore the portfolio through commands.</h2>
         </div>
-        <div class="timeline">
-          <article class="card timeline__item">
-            <span class="card-index">01</span>
-            <h3>Enterprise Engineering</h3>
-            <p>
-              Built large-scale backend features and data-heavy services while learning how to ship dependable software
-              in complex environments.
-            </p>
-          </article>
-          <article class="card timeline__item">
-            <span class="card-index">02</span>
-            <h3>Microservices & Cloud</h3>
-            <p>
-              Moved deeper into distributed systems with Docker, Kubernetes, CI/CD, and cloud infrastructure centered on
-              uptime and maintainability.
-            </p>
-          </article>
-          <article class="card timeline__item">
-            <span class="card-index">03</span>
-            <h3>Backend & DevOps Leadership</h3>
-            <p>
-              Led architecture choices, mentorship, delivery practices, and observability standards for stronger team
-              execution.
-            </p>
-          </article>
-          <article class="card timeline__item">
-            <span class="card-index">04</span>
-            <h3>AI-Driven Automation</h3>
-            <p>
-              Building LLM-powered tooling and workflow automation that accelerates engineering and operations without
-              adding fragile complexity.
-            </p>
-          </article>
-        </div>
-      </section>
 
-      <section id="skills" class="section section--split reveal">
-        <div class="section-heading">
-          <p class="eyebrow">Skills snapshot</p>
-          <h2>Engineering range with a platform mindset.</h2>
-        </div>
-        <div class="skills-grid">
-          <div class="skill-block">
-            <h3>Languages & Frameworks</h3>
-            <p>Python, Go, Shell, Django, Flask, JavaScript</p>
+        <div class="terminal-shell" data-terminal>
+          <div class="terminal-shell__bar" aria-hidden="true">
+            <span></span>
+            <span></span>
+            <span></span>
+            <p>sarthak@portfolio:~</p>
           </div>
-          <div class="skill-block">
-            <h3>Cloud & Containers</h3>
-            <p>AWS, GCP, Docker, Kubernetes</p>
+          <div class="terminal-output" data-terminal-output aria-live="polite">
+            <p class="terminal-line terminal-line--muted">
+              Type <strong>man</strong> and press Enter to list available options.
+            </p>
           </div>
-          <div class="skill-block">
-            <h3>Data & Messaging</h3>
-            <p>PostgreSQL, MySQL, MongoDB, Redis, Celery</p>
-          </div>
-          <div class="skill-block">
-            <h3>Workflow & DevOps</h3>
-            <p>Jenkins, Apache Airflow, Git, GitHub, GitLab, Linux</p>
-          </div>
-          <div class="skill-block">
-            <h3>Observability</h3>
-            <p>Prometheus, Grafana, Loki, Splunk, Datadog, Elasticsearch</p>
-          </div>
-          <div class="skill-block">
-            <h3>AI & ML Tooling</h3>
-            <p>LLMs, Hugging Face, Ollama, LM Studio, scikit-learn, PyTorch, n8n</p>
-          </div>
-        </div>
-      </section>
-
-      <section class="section reveal">
-        <div class="section-heading">
-          <p class="eyebrow">Engineering values</p>
-          <h2>Reliable systems, useful automation, better teams.</h2>
-        </div>
-        <div class="highlights">
-          <article class="card">
-            <h3>Reliability Under Pressure</h3>
-            <p>Designing systems that stay fast, resilient, and observable when production reality gets loud.</p>
-          </article>
-          <article class="card">
-            <h3>Automation With Purpose</h3>
-            <p>Reducing repetitive work through robust pipelines and task orchestration that earns its place.</p>
-          </article>
-          <article class="card">
-            <h3>Pragmatic Team Practices</h3>
-            <p>Helping teams move with clearer standards, stronger reviews, and mentorship that compounds.</p>
-          </article>
+          <form class="terminal-input-row" data-terminal-form>
+            <label class="terminal-prompt" for="terminal-command">sarthak@portfolio:~$</label>
+            <input
+              id="terminal-command"
+              data-terminal-input
+              type="text"
+              autocomplete="off"
+              spellcheck="false"
+              aria-label="Enter portfolio terminal command"
+              placeholder="sv -s"
+            />
+          </form>
         </div>
       </section>
 
