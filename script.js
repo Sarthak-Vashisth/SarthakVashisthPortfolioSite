@@ -24,9 +24,9 @@ if (terminal) {
   let historyIndex = 0;
 
   const commands = {
-    man: `
+    "man sv": `
       <div class="terminal-block">
-        <strong>Available options</strong>
+        <strong>Manual: sv</strong>
         <ul class="terminal-list">
           <li><strong>sv -s</strong> - display Sarthak's technical skill set</li>
           <li><strong>sv -j</strong> - display Sarthak's developer journey</li>
@@ -41,7 +41,7 @@ if (terminal) {
     "sv -s": `
       <div class="terminal-block">
         <strong>Skill set</strong>
-        <p>Languages & frameworks: Python, Go, Shell, Django, Flask, JavaScript.</p>
+        <p>Languages & frameworks: Python, Go, Shell, Django, Flask, FastAPI, JavaScript.</p>
         <p>Cloud & containers: AWS, GCP, Docker, Kubernetes.</p>
         <p>Data & messaging: PostgreSQL, MySQL, MongoDB, Redis, Celery.</p>
         <p>Workflow & DevOps: Jenkins, Apache Airflow, Git, GitHub, GitLab, Linux.</p>
@@ -121,7 +121,7 @@ if (terminal) {
     if (commands[command]) {
       appendBlock(commands[command]);
     } else {
-      appendLine(`Command not found: ${rawCommand.trim()}. Type "man" to see available options.`, "terminal-line terminal-line--error");
+      appendLine(`Command not found: ${rawCommand.trim()}. Type "man sv" to see available options.`, "terminal-line terminal-line--error");
     }
 
     scrollOutput();
