@@ -172,9 +172,14 @@ if (carousel) {
   const dotsWrap = carousel.querySelector(".carousel__dots");
   const prevButton = carousel.querySelector("[data-carousel-prev]");
   const nextButton = carousel.querySelector("[data-carousel-next]");
+  const videoIframes = Array.from(carousel.querySelectorAll("iframe"));
   let activeIndex = 0;
   let touchStartX = 0;
   let autoplayId;
+  let isPointerInside = false;
+  let hasFocusInside = false;
+  let isVideoPlaying = false;
+  let youtubePlayers = [];
 
   const dots = slides.map((_, index) => {
     const dot = document.createElement("button");
@@ -198,6 +203,10 @@ if (carousel) {
   }
 
   function startAutoplay() {
+    if (isPointerInside || hasFocusInside || isVideoPlaying) {
+      return;
+    }
+
     stopAutoplay();
     autoplayId = window.setInterval(() => setSlide(activeIndex + 1), 5000);
   }
@@ -210,8 +219,80 @@ if (carousel) {
   }
 
   function moveSlide(index) {
+    pauseAllVideos();
     setSlide(index);
     startAutoplay();
+  }
+
+  function pauseAllVideos() {
+    youtubePlayers.forEach((player) => {
+      if (typeof player.pauseVideo === "function") {
+        player.pauseVideo();
+      }
+    });
+  }
+
+  function initYouTubePlayers() {
+    if (!window.YT || !window.YT.Player || youtubePlayers.length) {
+      return;
+    }
+
+    youtubePlayers = videoIframes.map(
+      (iframe) =>
+        new window.YT.Player(iframe, {
+          events: {
+            onStateChange(event) {
+              if (event.data === window.YT.PlayerState.PLAYING) {
+                isVideoPlaying = true;
+                stopAutoplay();
+                return;
+              }
+
+              if (event.data === window.YT.PlayerState.PAUSED || event.data === window.YT.PlayerState.ENDED) {
+                isVideoPlaying = youtubePlayers.some(
+                  (player) =>
+                    typeof player.getPlayerState === "function" &&
+                    player.getPlayerState() === window.YT.PlayerState.PLAYING
+                );
+                startAutoplay();
+              }
+            },
+          },
+        })
+    );
+  }
+
+  function loadYouTubeApi() {
+    videoIframes.forEach((iframe) => {
+      const iframeUrl = new URL(iframe.src);
+      iframeUrl.searchParams.set("enablejsapi", "1");
+
+      if (window.location.origin !== "null") {
+        iframeUrl.searchParams.set("origin", window.location.origin);
+      }
+
+      iframe.src = iframeUrl.toString();
+    });
+
+    if (window.YT && window.YT.Player) {
+      initYouTubePlayers();
+      return;
+    }
+
+    const previousReadyHandler = window.onYouTubeIframeAPIReady;
+    window.onYouTubeIframeAPIReady = () => {
+      if (typeof previousReadyHandler === "function") {
+        previousReadyHandler();
+      }
+
+      initYouTubePlayers();
+    };
+
+    if (!document.querySelector('script[src="https://www.youtube.com/iframe_api"]')) {
+      const script = document.createElement("script");
+      script.src = "https://www.youtube.com/iframe_api";
+      document.head.appendChild(script);
+    }
   }
 
   prevButton.addEventListener("click", () => moveSlide(activeIndex - 1));
@@ -227,10 +308,25 @@ if (carousel) {
     }
   });
 
-  carousel.addEventListener("mouseenter", stopAutoplay);
-  carousel.addEventListener("mouseleave", startAutoplay);
-  carousel.addEventListener("focusin", stopAutoplay);
-  carousel.addEventListener("focusout", startAutoplay);
+  carousel.addEventListener("mouseenter", () => {
+    isPointerInside = true;
+    stopAutoplay();
+  });
+
+  carousel.addEventListener("mouseleave", () => {
+    isPointerInside = false;
+    startAutoplay();
+  });
+
+  carousel.addEventListener("focusin", () => {
+    hasFocusInside = true;
+    stopAutoplay();
+  });
+
+  carousel.addEventListener("focusout", () => {
+    hasFocusInside = false;
+    startAutoplay();
+  });
 
   carousel.addEventListener(
     "touchstart",
@@ -254,5 +350,6 @@ if (carousel) {
   );
 
   setSlide(0);
+  loadYouTubeApi();
   startAutoplay();
 }
