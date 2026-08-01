@@ -29,6 +29,7 @@ if (terminal) {
         <strong>Manual: sv</strong>
         <ul class="terminal-list">
           <li><strong>sv -s</strong> - display Sarthak's technical skill set</li>
+          <li><strong>sv -summary</strong> - display Sarthak's professional summary</li>
           <li><strong>sv -j</strong> - display Sarthak's developer journey</li>
           <li><strong>sv -engval</strong> - display Sarthak's engineering values</li>
           <li><strong>sv -g</strong> - display Sarthak's GitHub profile</li>
@@ -41,12 +42,19 @@ if (terminal) {
     "sv -s": `
       <div class="terminal-block">
         <strong>Skill set</strong>
-        <p>Languages & frameworks: Python, Go, Shell, Django, Flask, FastAPI, JavaScript.</p>
-        <p>Cloud & containers: AWS, GCP, Docker, Kubernetes.</p>
-        <p>Data & messaging: PostgreSQL, MySQL, MongoDB, Redis, Celery.</p>
-        <p>Workflow & DevOps: Jenkins, Apache Airflow, Git, GitHub, GitLab, Linux.</p>
-        <p>Observability: Prometheus, Grafana, Loki, Splunk, Datadog, Elasticsearch.</p>
-        <p>AI & ML tooling: LLMs, Hugging Face, Ollama, LM Studio, scikit-learn, PyTorch, n8n.</p>
+        <p>Languages & backend: Python, Shell Scripting, Java, JavaScript, Django, Flask, FastAPI, Django REST Framework, Microservices, REST APIs.</p>
+        <p>Cloud & DevOps: AWS, GCP, Docker, Kubernetes, Jenkins, CI/CD, Linux, Rancher, ArgoCD, Kargo, Harness.</p>
+        <p>Data & automation: PostgreSQL, Microsoft SQL Server, MongoDB, Redis, Elasticsearch, Apache Airflow, Celery, n8n.</p>
+        <p>Observability: Grafana, Prometheus, Loki, Splunk, ELK Stack.</p>
+        <p>AI & LLM: Hugging Face, Ollama, LM Studio, Prompt Engineering, Vector Databases, Retrieval-Augmented Generation.</p>
+      </div>
+    `,
+    "sv -summary": `
+      <div class="terminal-block">
+        <strong>Professional summary</strong>
+        <p>Senior backend engineer with 11+ years of experience building scalable backend systems, cloud-native applications, workflow automation platforms, and distributed systems.</p>
+        <p>Strong hands-on experience with Python, Django, Flask, Docker, Kubernetes, AWS, GCP, Apache Airflow, CI/CD, and production observability.</p>
+        <p>Currently focused on AI-driven automation and LLM-based workflows.</p>
       </div>
     `,
     "sv -j": `
